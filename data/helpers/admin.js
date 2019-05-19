@@ -15,5 +15,11 @@ module.exports = {
     }
 
     return query
+  },
+  getByUsername: function (username) {
+    return db('admin').select().where('username', username).first()
+  },
+  insert: function (admin) {
+    return db('admin').insert(admin)
   }
 }

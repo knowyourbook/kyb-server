@@ -17,5 +17,8 @@ module.exports = {
     }
 
     return query
+  },
+  insert: function (school) {
+    return db('school').insert(school)
   }
 }
