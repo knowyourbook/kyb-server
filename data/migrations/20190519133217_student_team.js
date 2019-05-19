@@ -1,5 +1,7 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('read_list', function(tbl) {
+  return knex.schema.createTable('student_team', function(tbl) {
+    tbl.increments()
+
     tbl
       .integer('student_id')
       .notNullable()
@@ -8,16 +10,14 @@ exports.up = function(knex, Promise) {
       .onDelete('CASCADE')
 
     tbl
-      .integer('team_book_id')
+      .integer('team_id')
       .notNullable()
       .references('id')
-      .inTable('team_book')
+      .inTable('team')
       .onDelete('CASCADE')
-
-    tbl.primary(['student_id', 'team_book_id'])
   })
 }
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists('read_list')
+  return knex.schema.dropTableIfExists('student_team')
 }

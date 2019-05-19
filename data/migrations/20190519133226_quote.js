@@ -18,10 +18,10 @@ exports.up = function(knex, Promise) {
       .defaultTo(false)
 
     tbl
-      .integer('team_book_id')
+      .integer('book_id')
       .notNullable()
       .references('id')
-      .inTable('team_book')
+      .inTable('book')
       .onDelete('CASCADE')
   })
 }

@@ -7,10 +7,10 @@ exports.up = function(knex, Promise) {
     tbl.string('description', 50).notNullable()
 
     tbl
-      .integer('admin_id')
+      .integer('school_id')
       .notNullable()
       .references('id')
-      .inTable('admin')
+      .inTable('school')
       .onDelete('CASCADE')
   })
 }

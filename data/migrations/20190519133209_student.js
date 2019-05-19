@@ -14,10 +14,10 @@ exports.up = function(knex, Promise) {
     tbl.string('password', 50).notNullable()
 
     tbl
-      .integer('team_id')
+      .integer('school_id')
       .notNullable()
       .references('id')
-      .inTable('team')
+      .inTable('school')
       .onDelete('CASCADE')
   })
 }
