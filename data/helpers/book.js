@@ -9,5 +9,11 @@ module.exports = {
     }
 
     return query
+  },
+  getQuotes: function(id) {
+    return db('quote')
+      .select('text', 'page', 'approved')
+      .where('book_id', id)
+      .first()
   }
 }

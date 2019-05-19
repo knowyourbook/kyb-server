@@ -31,4 +31,16 @@ router
         .json({ error: true, message: 'Failed to fetch book info' })
     }
   })
+  .get('/:id/quotes', async (req, res) => {
+    const { id } = req.params
+
+    try {
+      const quotes = await bookDB.getQuotes(Number(id))
+      res.status(200).json(quotes)
+    } catch (err) {
+      res
+        .status(500)
+        .json({ error: true, message: 'Failed to fetch quotes info' })
+    }
+  })
 module.exports = router
