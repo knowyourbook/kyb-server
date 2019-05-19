@@ -13,7 +13,7 @@ module.exports = {
       .join('school_level', 'school_level.id', 'school.level_id')
 
     if (id) {
-      query.where('id', id).first()
+      query.where('school.id', id).first()
     }
 
     return query
