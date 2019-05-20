@@ -11,7 +11,7 @@ module.exports = {
     ).join('school', 'school.id','admin.school_id')
 
     if (id) {
-      query.where('id', id).first()
+      query.where('admin.id', id).first()
     }
 
     return query
