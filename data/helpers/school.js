@@ -20,5 +20,8 @@ module.exports = {
   },
   insert: function (school) {
     return db('school').insert(school)
+  },
+  remove: function (id) {
+    return db('school').where('id', id).del()
   }
 }

@@ -19,10 +19,16 @@ module.exports = {
   getByUsername: function (username) {
     return db('admin').select().where('username', username).first()
   },
+  getSchoolId: function (id) {
+    return db('admin').select('school_id').where('id', id).first()
+  },
   insert: function (admin) {
     return db('admin').insert(admin)
   },
   update: function (admin, id) {
     return db('admin').where('id',id).update(admin)
+  },
+  remove: function (id) {
+    return db('admin').where('id', id).del()
   }
 }

@@ -1,6 +1,7 @@
 const express = require('express')
 
 const adminDb = require('../../../data/helpers/admin')
+const schoolDb = require('../../../data/helpers/school')
 const { decodeToken } = require('../../auth/token')
 const { validateUserUpdate } = require('../../middleware/validate')
 
@@ -37,6 +38,26 @@ router
       }
     } catch (err) {
       res.status(500).json({ error: true, message: 'Failed to update admin' })
+    }
+  })
+  .delete('/', async (req, res) => {
+    try {
+      const { currentUser } = req.body
+
+      const { school_id } = await adminDb.getSchoolId(currentUser.id)
+
+      await adminDb.remove(currentUser.id)
+      const deletedSchool = await schoolDb.remove(school_id)
+
+      if (deletedSchool === 1) {
+        res.sendStatus(204)
+      } else {
+        res
+          .status(404)
+          .json({ error: true, message: 'Cannot remove admin' })
+      }
+    } catch (err) {
+      res.status(500).json({ error: true, message: 'Failed to remove admin' })
     }
   })
 
