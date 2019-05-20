@@ -21,5 +21,8 @@ module.exports = {
   },
   insert: function (admin) {
     return db('admin').insert(admin)
+  },
+  update: function (admin, id) {
+    return db('admin').where('id',id).update(admin)
   }
 }

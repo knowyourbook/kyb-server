@@ -84,5 +84,22 @@ module.exports = {
       req.body.role = userRole
       next()
     }
+  },
+  validateUserUpdate: async function(req, res, next) {
+    const { firstname, lastname } = req.body
+    let user = {}
+
+    if (!firstname && !lastname) {
+      res.status(400).json({ error: true, message: 'Missing required info' })
+    } else {
+      if (firstname && typeof firstname === 'string') {
+        user.firstname = firstname
+      }
+      if (lastname && typeof lastname === 'string') {
+        user.lastname = lastname
+      }
+      req.body.user = user
+      next()
+    }
   }
 }
