@@ -17,7 +17,7 @@ router
         ...user,
         school_id: schoolId[0]
       })
-      const token = generateToken({ id: adminId[0] }, 'ADMIN')
+      const token = generateToken({ id: adminId[0] }, 'admin')
       res.status(201).json({ id: adminId[0], token })
     } catch (err) {
       res.status(500).json({ error: true, message: 'Failed to create account' })
@@ -30,7 +30,7 @@ router
       const matchUser = await adminDb.getByUsername(username)
 
       if (matchUser && bcrypt.compareSync(password, matchUser.password)) {
-        const token = generateToken({ id: matchUser.id }, 'ADMIN')
+        const token = generateToken({ id: matchUser.id, role: 'admin'}, 'admin')
         res.status(200).json({ token })
       } else {
         res.status(400).send('Invalid username or password')

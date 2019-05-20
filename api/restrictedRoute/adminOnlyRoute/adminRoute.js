@@ -8,8 +8,8 @@ const router = express.Router()
 router
   .get('/', async (req, res) => {
     try {
-      const { id } = await decodeToken(req.headers.authorization)
-      const admin = await adminDb.get(Number(id))
+      const { currentUser } = req.body
+      const admin = await adminDb.get(currentUser.id)
 
       if (admin) {
         res.status(200).json(admin)
@@ -24,10 +24,9 @@ router
   })
   .put('/', validateUserUpdate, async (req, res) => {
     try {
-      const { id } = await decodeToken(req.headers.authorization)
-      const { user } = req.body
+      const { user, currentUser } = req.body
 
-      const updated = await adminDb.update(user, Number(id))
+      const updated = await adminDb.update(user, currentUser.id)
 
       if (updated === 1) {
         res.sendStatus(204)
