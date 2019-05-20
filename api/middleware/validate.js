@@ -70,5 +70,19 @@ module.exports = {
           .json({ error: true, message: 'Failed to verify username' })
       }
     }
+  },
+  userlogin: async function(req, res, next) {
+    const { username, password } = req.body
+
+    const userRole = req.originalUrl.includes('admins') ? 'ADMIN' : 'STUDENT'
+
+    if (!username || !password) {
+      res.status(400).json({ error: true, message: 'Missing required info' })
+    } else if (typeof username !== 'string' || typeof password !== 'string') {
+      res.status(400).json({ error: true, message: 'Invalid input type' })
+    } else {
+      req.body.role = userRole
+      next()
+    }
   }
 }
