@@ -101,5 +101,25 @@ module.exports = {
       req.body.user = user
       next()
     }
+  },
+  validateSchoolUpdate: async function(req, res, next) {
+    const { name, city, state } = req.body
+    let school = {}
+
+    if (!name && !city && !state) {
+      res.status(400).json({ error: true, message: 'Missing required info' })
+    } else {
+      if (name && typeof name === 'string') {
+        school.name = name
+      }
+      if (city && typeof city === 'string') {
+        school.city = city
+      }
+      if (state && typeof state === 'string') {
+        school.state = state
+      }
+      req.body.school = school
+      next()
+    }
   }
 }

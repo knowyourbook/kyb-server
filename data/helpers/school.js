@@ -23,5 +23,8 @@ module.exports = {
   },
   remove: function (id) {
     return db('school').where('id', id).del()
+  },
+  update: function (school, id) {
+    return db('school').where('id',id).update(school)
   }
 }

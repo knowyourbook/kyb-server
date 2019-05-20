@@ -2,7 +2,6 @@ const express = require('express')
 
 const adminDb = require('../../../data/helpers/admin')
 const schoolDb = require('../../../data/helpers/school')
-const { decodeToken } = require('../../auth/token')
 const { validateUserUpdate } = require('../../middleware/validate')
 
 const router = express.Router()
